@@ -42,7 +42,7 @@ if (isset($_POST["upload"])) {
   }
 
   // get the info about the uploaded files.
-  $upload = $_FILES["file"];
+  $upload = $_FILES["svg-file"];
 
   // Assume the form is valid...
   $form_valid = true;
@@ -89,7 +89,7 @@ if (isset($_POST["upload"])) {
       // move the uploaded file to it's final resting place: public/uploads directory
 
       // get the newly inserted record's id
-      $record_id = 1;
+      $record_id = $db->lastInsertId("id");
 
       // uploaded file should be in folder with same name as table with the primary key as the filename.
       // Note: THIS IS NOT A URL; this is a FILE PATH on the server!
@@ -159,7 +159,7 @@ $records = exec_sql_query(
     <section class="upload">
       <h2>Upload Clipart</h2>
 
-      <form action="/plopbox" method="post" enctype="multipart:form-data">
+      <form action="/plopbox" method="post" enctype="multipart/form-data">
 
         <!-- MAX_FILE_SIZE must precede the file input field -->
         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>">
